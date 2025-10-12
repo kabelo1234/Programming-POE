@@ -1,6 +1,4 @@
 package com.example;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,18 +17,28 @@ public class Message {
     private String statusMessage;
 
     // Constructor
-    public Message(String messageID, String messageText, String recipientCell) {
-        this.messageID = messageID;
+    public Message( String messageText, String recipientCell) {
+        this.messageID = generateMessageID();
         this.messageText = messageText;
         this.recipientCell = recipientCell;
     }
 
+    private static String generateMessageID() {
+        String id;
+        do {
+            long number = (long) (Math.random() * 1_000_000_0000L);
+            id = String.format("%010d", number);
+        } while (usedMessageIDs.contains(id));
+        usedMessageIDs.add(id);
+        return id;
+    }
+
     public boolean checkMessageID() {
-        if (messageID == null || usedMessageIDs.contains(messageID)) {
-            return false;
-        }
-        usedMessageIDs.add(messageID);
-        return true;
+        return messageID != null && messageID.length() == 10 && usedMessageIDs.contains(messageID);
+    }
+
+    public String getMessageID() {
+        return messageID;
     }
 
     public int checkRecipientCell() {
@@ -40,19 +48,19 @@ public class Message {
             return 0; // Invalid
     }
 
-    public String createMessageHash() {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = md.digest(messageText.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashBytes) {
-                sb.append(String.format("%02x", b));
-            }
-        
-        return sb.toString(); 
-    } catch (NoSuchAlgorithmException e) {
-            return "Error generating hash";
+    public String createMessageHash(int messageNumber) {
+        String idPart = messageID.length() >= 2 ? messageID.substring(0, 2) : messageID;
+
+        String numberPart = String.valueOf(messageNumber);
+
+        String textPart;
+        if (messageText.length() >= 3) {
+            textPart = messageText.substring(0, 2) + messageText.substring(messageText.length() - 2);
+        } else {
+            textPart = messageText;
         }
+
+        return (idPart + numberPart + textPart).toUpperCase();
     }
 
     public String SentMessage(Scanner scanner) {

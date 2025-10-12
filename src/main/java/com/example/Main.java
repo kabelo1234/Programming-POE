@@ -1,23 +1,24 @@
 package com.example;
-import com.example.login;
-import com.example.Message;
 import javax.swing.JOptionPane;
 import java.util.Scanner;
+
+import static java.lang.System.*;
+
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(in);
    
         // Get user details for registration
-        System.out.print("Enter your name: ");
+        out.print("Enter your name: ");
         String name = scanner.nextLine();
-        System.out.print("Enter your surname: ");
+        out.print("Enter your surname: ");
         String surname = scanner.nextLine();
         
-        System.out.print("Enter your username: ");
+        out.print("Enter your username: ");
         String username = scanner.nextLine();
-        System.out.print("Enter your password: ");
+        out.print("Enter your password: ");
         String password = scanner.nextLine();
-        System.out.print("Enter your phone number: ");
+        out.print("Enter your phone number: ");
         String phoneNumber = scanner.nextLine();
 
         // Create a login object
@@ -25,7 +26,7 @@ public class Main {
         
         // Registering the user
         String registrationMessage = user.registerUser(name, password, phoneNumber, username, surname);
-        System.out.println(registrationMessage);
+        out.println(registrationMessage);
 
         // If registration is successful, proceed to login
         if (!registrationMessage.equals("Registration successful!")) {
@@ -33,26 +34,27 @@ public class Main {
         }
 
 
-        System.out.print("Enter your username to login: ");
+        out.print("Enter your username to login: ");
         String loginUsername = scanner.nextLine();
-        System.out.print("Enter your password to login: ");
+        out.print("Enter your password to login: ");
         String loginPassword = scanner.nextLine();
 
         // check login status and prints message
         boolean loginStatus = user.loginUser(loginUsername, loginPassword, phoneNumber);
-        System.out.println(user.returnLoginStatus(loginStatus));
+        out.println(user.returnLoginStatus(loginStatus));
         
         // Message sending functionality
-        System.out.println("\nWelcome to QuickChat.");
-        System.out.print("How many messages would you like to send? ");
+        out.println("\nWelcome to QuickChat.");
+        out.print("How many messages would you like to send? ");
         int messageLimit = scanner.nextInt();
 
         int messagesSent = 0;
-        while (true) {
-            System.out.print("\nChoose an option:");
-            System.out.println("1) Send message");
-            System.out.println("2) Show sent messages");
-            System.out.println("3) Exit");
+        boolean running = true;
+        while (running) {
+            out.print("\nChoose an option:");
+            out.println("1) Send message");
+            out.println("2) Show sent messages");
+            out.println("3) Exit");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -60,56 +62,67 @@ public class Main {
             switch (choice) {
             case 1:
                 if (messagesSent >= messageLimit) {
-                    System.out.println("Message limit reached. You cannot send more messages.");
+                    out.println("Message limit reached. You cannot send more messages.");
                     break;
                 }
 
-                System.out.print("Enter message ID: ");
-                String messageID = scanner.nextLine();
-                System.out.print("Enter recipient's cell number: ");
+
+                out.print("Enter recipient's cell number: ");
                 String recipientCell = scanner.nextLine();
-                System.out.print("Enter message content: ");
+                out.print("Enter message: ");
                 String messageText = scanner.nextLine();
 
-                Message msg = new Message(messageID, messageText, recipientCell);
+                Message msg = new Message(messageText, recipientCell);
+
+                if (messageText.length() > 250) {
+                    out.println("Please enter a message of less than 50 characters");
+                    break;
+                }
                 
                 if (!msg.checkMessageID()) {
-                    System.out.println("Message ID already used or invalid. Please use a unique ID.");
+                    out.println("Message ID already used or invalid. Please use a unique ID.");
                     break;
                 }
 
                 if (msg.checkRecipientCell() == 0) {
-                    System.out.println("Invalid recipient cell number. Please include the country code.");
+                    out.println("Invalid recipient cell number. Please include the country code.");
                     break;
                 }
 
-                String hash = msg.createMessageHash();
-                System.out.println("Message Hash: " + hash);
+                String hash = msg.createMessageHash(messagesSent);
+                out.println("Message Hash: " + hash);
+
 
                 String result = msg.SentMessage(scanner);
-                System.out.println(result);
+                out.println(result);
+
+                String messageDetails =
+                        "Message ID: " + msg.getMessageID() + "\n" +
+                        "Message Hash: " + hash + "\n" +
+                        "Recipient: " + recipientCell + "\n" +
+                        "Message: " + messageText + "\n\n" +
+                        "Status: " + result;
+
+                JOptionPane.showMessageDialog(null, messageDetails, "Message Sent", JOptionPane.INFORMATION_MESSAGE);
 
                 messagesSent++;
                 break;
 
-            case 2:
-                System.out.println("Coming soon.");
+                case 2:
+                out.println("Coming soon");
                 break;
+
             case 3:
-                System.out.println("Exiting QuickChat. Goodbye!");
+                out.println("Exiting QuickChat. Goodbye!");
+                JOptionPane.showMessageDialog(null, "Total messages sent: " + Message.getTotalMessagesSent(), "Summary", JOptionPane.INFORMATION_MESSAGE);
                 scanner.close();
                 return;
 
             default:
-                System.out.println("Invalid option. Please try again.");
+                out.println("Invalid option. Please try again.");
                 break;
             }
         }
-
-        System.out.println("Total messages sent: " + Message.getTotalMessagesSent());
-        JOptionPane.showMessageDialog(null, "Total messages sent: " + Message.getTotalMessagesSent(), "Summary", JOptionPane.INFORMATION_MESSAGE);
-        scanner.close();
- 
 }
 }
                 
