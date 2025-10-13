@@ -4,22 +4,29 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Message class to handle message creation, validation, and storage.
+ */
 public class Message {
-    private static final HashSet<String> usedMessageIDs = new HashSet<>();
-    private static final List<String> sentMessage = new ArrayList<>();
-    private static int totalMessagesSent = 0;
-    private final String messageID;
-    private final String messageText; 
-    private final String recipientCell;
-    private String statusMessage;
+    private static final HashSet<String> usedMessageIDs = new HashSet<>(); // To track used message IDs
+    private static final List<String> sentMessage = new ArrayList<>(); // To store sent messages
+    private static int totalMessagesSent = 0; // To track total messages sent
+    private final String messageID; // Unique 10-digit message ID
+    private final String messageText; // Message content
+    private final String recipientCell; // Recipient's cell number
+    private String statusMessage; // Status of the message (sent, stored, deleted)
 
     // Constructor
-    public Message( String messageText, String recipientCell) {
+    public Message(String messageText, String recipientCell) {
         this.messageID = generateMessageID();
         this.messageText = messageText;
         this.recipientCell = recipientCell;
+
+        //Prints the generated message ID
+    System.out.println("Message ID generated : " + messageID);
     }
 
+    // Generates a unique 10-digit message ID
     private static String generateMessageID() {
         String id;
         do {
@@ -30,21 +37,25 @@ public class Message {
         return id;
     }
 
+    // Checks if the message ID is valid and has been used
     public boolean checkMessageID() {
         return messageID != null && messageID.length() == 10 && usedMessageIDs.contains(messageID);
     }
 
+    // Getter for message ID
     public String getMessageID() {
         return messageID;
     }
 
+    // Validates the recipient's cell number format
     public int checkRecipientCell() {
         if (recipientCell != null && recipientCell.matches("\\+27\\d{9}")) {
             return 1; // Valid
         }
-            return 0; // Invalid
+        return 0; // Invalid
     }
 
+    // Creates a message hash based on the message ID, number, and text
     public String createMessageHash(int messageNumber) {
         String idPart = messageID.length() >= 2 ? messageID.substring(0, 2) : messageID;
         String numberPart = String.valueOf(messageNumber);
@@ -54,9 +65,14 @@ public class Message {
         } else {
             textPart = messageText;
         }
-        return (idPart + ":" + numberPart + ":" + textPart).toUpperCase();
+        String hash = (idPart + ":" + numberPart + ":" + textPart).toUpperCase();
+
+
+    System.out.println("Message hash is correct");
+    return hash;
     }
 
+    // Handles sending, storing, or disregarding the message based on user input
     public String SentMessage(Scanner scanner) {
         System.out.println("Choose an option:");
         System.out.println("1. Send");
@@ -65,26 +81,24 @@ public class Message {
 
         int choice = scanner.nextInt();
         scanner.nextLine(); // Consume newline
-            switch (choice) {
-             case 1:
+
+          // Process user choice
+            if (choice == 1) {
              sentMessage.add("Sent: " + messageText);
                 totalMessagesSent++;
-                statusMessage = "Message sent successfully!";
-                break;
-            case 2:
+                statusMessage = "Message successfully sent";
+            } else if (choice == 2) {
                 sentMessage.add("Stored: " + messageText);
-                statusMessage = "Message stored successfully!";
-                break;
-            case 3:
+                statusMessage = "Message successfully stored";
+            } else if (choice == 3) {
              statusMessage = "Message deleted!";
-                break;
-            default:
+            } else {
                 statusMessage = "Invalid option!";
-                break;
             }
         return statusMessage;
     }
 
+            // Prints all sent messages
      public String printMessages() {
                 if (sentMessage.isEmpty()) {
                     return "No messages to display.";
@@ -96,10 +110,12 @@ public class Message {
                 return sb.toString();
             }
 
+            // Getter for total messages sent
             public static int getTotalMessagesSent() {
                 return totalMessagesSent;
             }
 
+    // Stores messages in JSON format
             public String storeMessages() {
         if (sentMessage.isEmpty()) {
             return "[]";

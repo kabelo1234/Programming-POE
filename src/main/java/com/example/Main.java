@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 import static java.lang.System.*;
 
+/**
+ * Main class to run the QuickChat application.
+ * Handles user registration, login, and message sending functionalities.
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(in);
@@ -33,7 +37,7 @@ public class Main {
             return;
         }
 
-
+        // Get login details
         out.print("Enter your username to login: ");
         String loginUsername = scanner.nextLine();
         out.print("Enter your password to login: ");
@@ -63,35 +67,27 @@ public class Main {
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
-            switch (choice) {
-            case 1:
+            if (choice == 1) { // Checks if user has reached their message limit
                 if (messagesSent >= messageLimit) {
                     out.println("Message limit reached. You cannot send more messages.");
-                    break;
-                }
-
+                } else {
+                  //Collect message  details
                 out.print("Enter recipient's cell number: ");
                 String recipientCell = scanner.nextLine();
                 out.print("Enter message: ");
                 String messageText = scanner.nextLine();
 
+                // Creates Message object
                 Message msg = new Message(messageText, recipientCell);
 
+                // Validates message details
                 if (messageText.length() > 250) {
                     out.println("Please enter a message of less than 50 characters");
-                    break;
-                }
-                
-                if (!msg.checkMessageID()) {
+                }  else if (!msg.checkMessageID()) {
                     out.println("Message ID already used or invalid. Please use a unique ID.");
-                    break;
-                }
-
-                if (msg.checkRecipientCell() == 0) {
+                } else if (msg.checkRecipientCell() == 0) {
                     out.println("Invalid recipient cell number. Please include the country code.");
-                    break;
-                }
-
+                } else { //Generates message hash and sends message
                 String hash = msg.createMessageHash(messagesSent);
                 out.println("Message Hash: " + hash);
 
@@ -99,6 +95,7 @@ public class Main {
                 String result = msg.SentMessage(scanner);
                 out.println(result);
 
+                // Displays message details in a dialog box
                 String messageDetails =
                         "Message ID: " + msg.getMessageID() + "\n" +
                         "Message Hash: " + hash + "\n" +
@@ -109,23 +106,22 @@ public class Main {
                 JOptionPane.showMessageDialog(null, messageDetails, "Message Sent", JOptionPane.INFORMATION_MESSAGE);
 
                 messagesSent++;
-                break;
+                }
+                }
 
-                case 2:
+            } else if (choice == 2) { // Displays sent messages
                 out.println("Coming soon");
-                break;
 
-            case 3:
+            } else if (choice == 3) { // Exits the program and shows total messages sent
                 out.println("Exiting QuickChat. Goodbye!");
                 JOptionPane.showMessageDialog(null, "Total messages sent: " + Message.getTotalMessagesSent(), "Summary", JOptionPane.INFORMATION_MESSAGE);
                 scanner.close();
                 return;
 
-            default:
+            } else {
                 out.println("Invalid option. Please try again.");
-                break;
             }
         }
-}
+    }
 }
                 
