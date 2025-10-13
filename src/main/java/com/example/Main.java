@@ -42,6 +42,11 @@ public class Main {
         // check login status and prints message
         boolean loginStatus = user.loginUser(loginUsername, loginPassword, phoneNumber);
         out.println(user.returnLoginStatus(loginStatus));
+
+        if (!loginStatus) {
+            out.println("Incorrect login details. Ending program.");
+            return;
+        }
         
         // Message sending functionality
         out.println("\nWelcome to QuickChat.");
@@ -49,9 +54,8 @@ public class Main {
         int messageLimit = scanner.nextInt();
 
         int messagesSent = 0;
-        boolean running = true;
-        while (running) {
-            out.print("\nChoose an option:");
+        while (true) {
+            out.print("\nChoose an option: \n");
             out.println("1) Send message");
             out.println("2) Show sent messages");
             out.println("3) Exit");
@@ -65,7 +69,6 @@ public class Main {
                     out.println("Message limit reached. You cannot send more messages.");
                     break;
                 }
-
 
                 out.print("Enter recipient's cell number: ");
                 String recipientCell = scanner.nextLine();

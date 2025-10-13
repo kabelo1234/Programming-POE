@@ -4,9 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 public class Message {
     private static final HashSet<String> usedMessageIDs = new HashSet<>();
     private static final List<String> sentMessage = new ArrayList<>();
@@ -50,28 +47,24 @@ public class Message {
 
     public String createMessageHash(int messageNumber) {
         String idPart = messageID.length() >= 2 ? messageID.substring(0, 2) : messageID;
-
         String numberPart = String.valueOf(messageNumber);
-
         String textPart;
         if (messageText.length() >= 3) {
             textPart = messageText.substring(0, 2) + messageText.substring(messageText.length() - 2);
         } else {
             textPart = messageText;
         }
-
-        return (idPart + numberPart + textPart).toUpperCase();
+        return (idPart + ":" + numberPart + ":" + textPart).toUpperCase();
     }
 
     public String SentMessage(Scanner scanner) {
         System.out.println("Choose an option:");
         System.out.println("1. Send");
         System.out.println("2. Store");
-        System.out.println("3. Delete");
+        System.out.println("3. Disregard message");
 
         int choice = scanner.nextInt();
         scanner.nextLine(); // Consume newline
-
             switch (choice) {
              case 1:
              sentMessage.add("Sent: " + messageText);
@@ -82,7 +75,6 @@ public class Message {
                 sentMessage.add("Stored: " + messageText);
                 statusMessage = "Message stored successfully!";
                 break;
-                
             case 3:
              statusMessage = "Message deleted!";
                 break;
@@ -109,10 +101,27 @@ public class Message {
             }
 
             public String storeMessages() {
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                return gson.toJson(sentMessage);
+        if (sentMessage.isEmpty()) {
+            return "[]";
+        }
+
+        StringBuilder json = new StringBuilder("[\n");
+        for (int i = 0; i < sentMessage.size(); i++) {
+            String msg = sentMessage.get(i)
+                    .replace("\\", "\\\\");
+
+            json.append(" {\"message\": \"").append(msg).append("\" }");
+            if (i < sentMessage.size() - 1) {
+                json.append(",");
             }
+            json.append("\n");
             }
+            json.append("]");
+
+        return json.toString();
+        }
+    }
+
 
 
 
