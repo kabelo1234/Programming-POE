@@ -1,7 +1,6 @@
 package com.example;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+
+import java.io.*;
 import java.util.Scanner;
 
 /**
