@@ -134,34 +134,77 @@ public class Message {
         return sb.toString();
     }
 
-            // Getter for total messages sent
-            public static int getTotalMessagesSent() {
-                return totalMessagesSent;
+    // b. Longest sent message
+    public static String getLongestSentMessage() {
+        String longest = "";
+        for (int i = 0; i < totalMessagesSent; i++) {
+            if (sentMessages[i].length() > longest.length()) {
+                longest = sentMessages[i];
             }
-
-    // Stores messages in JSON format
-            public String storeMessages() {
-        if (sentMessage.isEmpty()) {
-            return "[]";
         }
-
-        StringBuilder json = new StringBuilder("[\n");
-        for (int i = 0; i < sentMessage.size(); i++) {
-            String msg = sentMessage.get(i)
-                    .replace("\\", "\\\\");
-
-            json.append(" {\"message\": \"").append(msg).append("\" }");
-            if (i < sentMessage.size() - 1) {
-                json.append(",");
-            }
-            json.append("\n");
-            }
-            json.append("]");
-
-        return json.toString();
-        }
+        return longest;
     }
 
+    // c. Search for message ID
+    public static String searchByMessageID(String id) {
+        for (int i = 0; i < totalMessagesSent; i++) {
+            if (messageIDs[i].equals(id)) {
+                return "Recipient: " + recipients[i] + ", Message: " + sentMessages[i];
+            }
+        }
+        return "Message ID not found.";
+    }
 
+    // d. Search by recipient
+    public static String searchByRecipient(String recipient) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < totalMessagesSent; i++) {
+            if (recipients[i].equals(recipient)) {
+                sb.append(sentMessages[i]).append("\n");
+            }
+        }
+        return sb.length() == 0 ? "No messages found for this recipient." : sb.toString();
+    }
 
+    // e. Delete message by hash
+    public static String deleteByHash(String hash) {
+        for (int i = 0; i < totalMessagesSent; i++) {
+            if (messageHashes[i].equals(hash)) {
+                // Shift arrays left to remove
+                for (int j = i; j < totalMessagesSent - 1; j++) {
+                    sentMessages[j] = sentMessages[j + 1];
+                    messageHashes[j] = messageHashes[j + 1];
+                    messageIDs[j] = messageIDs[j + 1];
+                    recipients[j] = recipients[j + 1];
+                }
+                totalMessagesSent--;
+                return "Message deleted successfully.";
+            }
+        }
+        return "Hash not found.";
+    }
+
+    // f. Full message report
+    public static String displayMessageReport(String senderName) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < totalMessagesSent; i++) {
+            sb.append("Sender: ").append(senderName)
+                    .append(", Recipient: ").append(recipients[i])
+                    .append(", Message ID: ").append(messageIDs[i])
+                    .append(", Hash: ").append(messageHashes[i])
+                    .append(", Message: ").append(sentMessages[i])
+                    .append("\n");
+        }
+        return sb.toString();
+    }
+    public String getMessageID() {
+        return messageID;
+    }
+    public static int getTotalMessagesSent() {
+        return totalMessagesSent;
+    }
+    public String getStatusMessage() {
+        return statusMessage;
+    }
+}
 
