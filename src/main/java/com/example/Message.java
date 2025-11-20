@@ -78,19 +78,25 @@ public class Message {
             return statusMessage;
         }
 
-          // Process user choice
-            if (choice == 1) {
-             sentMessage.add("Sent: " + messageText);
-                totalMessagesSent++;
-                statusMessage = "Message successfully sent";
-            } else if (choice == 2) {
-                sentMessage.add("Stored: " + messageText);
-                statusMessage = "Message successfully stored";
-            } else if (choice == 3) {
-             statusMessage = "Message deleted!";
-            } else {
-                statusMessage = "Invalid option!";
-            }
+        if (choice == 1) { // SEND
+            sentMessages[totalMessagesSent] = messageText;
+            messageIDs[totalMessagesSent] = messageID;
+            recipients[totalMessagesSent] = recipientCell;
+            messageHashes[totalMessagesSent] = createMessageHash();
+            totalMessagesSent++;
+            statusMessage = "Message successfully sent";
+        } else if (choice == 2) { // STORE
+            storedMessages[totalStored] = messageText;
+            totalStored++;
+            statusMessage = "Message successfully stored";
+            writeJsonFile(messageText);
+        } else if (choice == 3) { // DISREGARD
+            disregardedMessages[totalDisregarded] = messageText;
+            totalDisregarded++;
+            statusMessage = "Message deleted!";
+        } else {
+            statusMessage = "Invalid option!";
+        }
         return statusMessage;
     }
 
