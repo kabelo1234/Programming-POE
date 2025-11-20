@@ -19,7 +19,7 @@ public class MessageTest {
         Message msg = new Message(text, "+27718693002");
 
         // Check that the message length is within the limit
-        assertEquals(true, text.length() <= 250);
+        assertTrue(text.length() <= 250);
         // Validate the message length
         assertEquals("Message ready to send.", validateMessageLength(text));
     }
