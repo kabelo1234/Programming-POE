@@ -83,9 +83,8 @@ public class Main {
 
                 // Validates message details
                 if (messageText.length() > 250) {
-                    out.println("Please enter a message of less than 50 characters");
-                }  else if (!msg.checkMessageID()) {
-                    out.println("Message ID already used or invalid. Please use a unique ID.");
+                    JOptionPane.showMessageDialog(null, "Message too long (max 250 characters).");
+                    continue;
                 } else if (msg.checkRecipientCell() == 0) {
                     JOptionPane.showMessageDialog(null, "Invalid cell number format. Include '+27' and 9 digits.");
                     continue;
