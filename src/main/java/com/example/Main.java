@@ -34,7 +34,7 @@ public class Main {
         boolean loginStatus = user.loginUser(loginUsername, loginPassword, phoneNumber);
         JOptionPane.showMessageDialog(null, user.returnLoginStatus(loginStatus));
         if (!loginStatus) {
-            out.println("Incorrect login details. Ending program.");
+            JOptionPane.showMessageDialog(null, "Incorrect login details. Exiting program.");
             return;
         }
         
