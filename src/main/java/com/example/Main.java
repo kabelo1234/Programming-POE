@@ -70,13 +70,12 @@ public class Main {
 
             if (choice == 1) { // Checks if user has reached their message limit
                 if (messagesSent >= messageLimit) {
-                    out.println("Message limit reached. You cannot send more messages.");
-                } else {
-                  //Collect message  details
-                out.print("Enter recipient's cell number: ");
-                String recipientCell = scanner.nextLine();
-                out.print("Enter message: ");
-                String messageText = scanner.nextLine();
+                    JOptionPane.showMessageDialog(null, "Message limit reached.");
+                    continue;
+                }
+
+                String recipientCell = JOptionPane.showInputDialog("Enter recipient's cell number (+27...)");
+                String messageText = JOptionPane.showInputDialog("Enter message text:");
 
                 if (recipientCell == null || messageText == null) continue;
 
