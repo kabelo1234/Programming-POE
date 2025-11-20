@@ -128,7 +128,7 @@ public class MessageTest {
     @Test
     void testTotalMessagesIncrements() {
         int before = Message.getTotalMessagesSent();
-        Message msg = new Message("Test", "+27718693002");
+        Message msg = new Message("Test", "+27718693002", 0);
         Scanner scanner = new Scanner("1\n");
         msg.SentMessage(scanner);
         int after = Message.getTotalMessagesSent();
