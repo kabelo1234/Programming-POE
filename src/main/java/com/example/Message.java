@@ -17,9 +17,20 @@ public class Message {
     public static String[] messageIDs = new String[100];
     public static String[] recipients = new String[100];
 
-    // Constructor
-    public Message(String messageText, String recipientCell) {
-        this.messageID = generateMessageID();
+    // for tracking the number of messages
+    private static int totalMessagesSent = 0;
+    private static int totalDisregarded = 0;
+    private static int totalStored = 0;
+
+    // variables for messages
+    private final String messageID;
+    private final String messageText;
+    private final String recipientCell;
+    private String statusMessage;
+
+    // constructors for creating a new message
+    public Message(String messageText, String recipientCell, int loopIndex) {
+        this.messageID = generateMessageID(loopIndex);
         this.messageText = messageText;
         this.recipientCell = recipientCell;
 
