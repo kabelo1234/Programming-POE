@@ -26,10 +26,7 @@ public class Main {
         String registrationMessage = user.registerUser(name, password, phoneNumber, username, surname);
         JOptionPane.showMessageDialog(null, registrationMessage);
 
-        // If registration is successful, proceed to login
-        if (!registrationMessage.equals("Registration successful!")) {
-            return;
-        }
+        if (!registrationMessage.equals("Registration successful!")) return;
 
         // Get login details
         out.print("Enter your username to login: ");
