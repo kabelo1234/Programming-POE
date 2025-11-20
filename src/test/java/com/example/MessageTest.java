@@ -76,7 +76,7 @@ public class MessageTest {
     // Test to ensure a unique 10-digit message ID is generated correctly.
     @Test
     void testMessageIDGenerated() {
-        Message msg = new Message("Hello", "+2718693002");
+        Message msg = new Message("Hello", "+2718693002", 0);
         // Check that the message ID is not null and has a length of 10
         assertEquals(false, msg.getMessageID() == null);
         // Validate the message ID format and uniqueness
