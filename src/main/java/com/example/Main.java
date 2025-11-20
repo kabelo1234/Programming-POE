@@ -81,7 +81,8 @@ public class Main {
                 // Creates Message object
                 Message msg = new Message(messageText, recipientCell);
 
-                // Validates message details
+                Message msg = new Message(messageText, recipientCell, messagesSent);
+
                 if (messageText.length() > 250) {
                     JOptionPane.showMessageDialog(null, "Message too long (max 250 characters).");
                     continue;
