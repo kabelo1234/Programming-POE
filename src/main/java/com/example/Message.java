@@ -63,10 +63,12 @@ public class Message {
 
     // Send, store, or disregard
     public String SentMessage(Scanner scanner) {
-        System.out.println("Choose an option:");
-        System.out.println("1. Send");
-        System.out.println("2. Store");
-        System.out.println("3. Disregard message");
+        String choiceStr = javax.swing.JOptionPane.showInputDialog(
+                null,
+                "Choose an option:\n1. Send\n2. Store\n3. Disregard",
+                "Message Options",
+                javax.swing.JOptionPane.QUESTION_MESSAGE
+        );
 
         int choice = scanner.nextInt();
         scanner.nextLine(); // Consume newline
