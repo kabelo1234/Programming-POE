@@ -45,7 +45,7 @@ public class Message {
         return String.format("%010d", Long.parseLong(base));
     }
 
-    // Validates the recipient's cell number format
+    // validates cell phone number
     public int checkRecipientCell() {
         if (recipientCell != null && recipientCell.matches("\\+27\\d{9}")) {
             return 1; // Valid
