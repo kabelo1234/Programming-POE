@@ -49,10 +49,21 @@ public class Main {
 
         int messagesSent = 0;
         while (true) {
-            out.print("\nChoose an option: \n");
-            out.println("1) Send message");
-            out.println("2) Show sent messages");
-            out.println("3) Exit");
+            String menu = JOptionPane.showInputDialog(
+                    null,
+                    "Choose an option:\n" +
+                            "1) Send message\n" +
+                            "2) Show sent messages (Coming soon)\n" +
+                            "3) Display sender & recipient of all sent messages\n" +
+                            "4) Display longest sent message\n" +
+                            "5) Search for a message ID\n" +
+                            "6) Search messages by recipient\n" +
+                            "7) Delete a message by hash\n" +
+                            "8) Display full message report\n" +
+                            "9) Exit",
+                    "QuickChat Menu",
+                    JOptionPane.QUESTION_MESSAGE
+            );
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
