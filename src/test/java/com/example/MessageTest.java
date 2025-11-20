@@ -109,7 +109,7 @@ public class MessageTest {
     // Test to ensure storing a message works correctly and returns the expected status message.
     @Test
     void testStoreMessageOption2() {
-        Message msg = new Message("Hi Keegan, did you receive the payments?", "+27550975889");
+        Message msg = new Message("Hi Keegan, did you receive the payments?", "+27550975889", 0);
         Scanner scanner = new Scanner("2\n");
         String result = msg.SentMessage(scanner);
         assertEquals("Message successfully stored", result);
