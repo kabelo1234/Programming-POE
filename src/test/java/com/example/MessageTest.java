@@ -50,7 +50,7 @@ public class MessageTest {
     // Test to ensure recipient cell number validation works correctly for valid numbers.
     @Test
     void testRecipientValid() {
-        Message msg = new Message("Hi Mike, ", "+27718693002");
+        Message msg = new Message("Hi Mike, ", "+27718693002", 0);
         // Check that the recipient cell number is valid
         assertEquals(1, msg.checkRecipientCell());
         // Validate the recipient cell number
