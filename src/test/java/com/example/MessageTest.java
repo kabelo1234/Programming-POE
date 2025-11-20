@@ -93,7 +93,7 @@ public class MessageTest {
         String hash = msg.createMessageHash();
 
         // Validate the message hash format using regex
-        assertEquals(true, hash.matches("[0-9]{2}:0:[A-Z]{4,}"));
+        assertTrue( hash.matches("[0-9]{2}:0:[A-Z]{4,}"));
         System.out.println("Message Hash: " + hash);
     }
 
