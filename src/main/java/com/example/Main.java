@@ -32,8 +32,7 @@ public class Main {
         String loginUsername = JOptionPane.showInputDialog("Enter your username to login:");
         String loginPassword = JOptionPane.showInputDialog("Enter your password to login:");
         boolean loginStatus = user.loginUser(loginUsername, loginPassword, phoneNumber);
-        out.println(user.returnLoginStatus(loginStatus));
-
+        JOptionPane.showMessageDialog(null, user.returnLoginStatus(loginStatus));
         if (!loginStatus) {
             out.println("Incorrect login details. Ending program.");
             return;
