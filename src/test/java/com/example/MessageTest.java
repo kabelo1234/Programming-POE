@@ -100,7 +100,7 @@ public class MessageTest {
     // Test to ensure sending a message works correctly and returns the expected status message.
     @Test
     void testSendMessageOption1() {
-        Message msg = new Message("Hi Mike, can you join us for dinner tonight?", "+27718693002");
+        Message msg = new Message("Hi Mike, can you join us for dinner tonight?", "+27718693002", 0);
         Scanner scanner = new Scanner("1\n");
         String result = msg.SentMessage(scanner);
         assertEquals("Message successfully sent", result);
