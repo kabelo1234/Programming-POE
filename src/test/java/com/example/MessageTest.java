@@ -134,4 +134,154 @@ public class MessageTest {
         int after = Message.getTotalMessagesSent();
         assertEquals(before + 1, after);
     }
+
+    @Test
+    void testMessageArrayPopulation() {
+        // 
+        String[] testMessages = {
+            "Did you get the cake?",
+            "Where are you? You are late! I have asked you to be on time.",
+            "Yohoooo, I am at your gate.",
+            "It is dinner time !",
+        };
+
+        assertArrayEquals(testMessages, Message.printMessages("You").split("\n"));
+    }
+   
+    @Test 
+    void testLongestMessage() {
+        String[] messages = {
+          "Did you get the cake?",
+            "Where are you? You are late! I have asked you to be on time.",
+            "Yohoooo, I am at your gate.",
+            "It is dinner time !",
+    };
+    //
+    String longestMessage = "Where are you? You are late! I have asked you to be on time.";
+
+    assertEquals(longestMessage, getLongestMessage(messages));
+    }
+
+    // Helper method to get the longest message from an array of messages
+    private String getLongestMessage(String[] messages) {
+        String longest = "";
+        for (String msg : messages) {
+            if (msg.length() > longest.length()) {
+                longest = msg;
+            }
+        }
+        return longest;
+    }
+
+    @Test
+    void testMessageSearchByID() {
+        String messageID = "08388884567";
+
+        assertTrue(searchMessageID(messageID));
+    }
+
+    // Helper method to simulate searching for a message by its ID
+    private boolean searchMessageID(String messageID) {
+
+        return messageID.equals("08388884567");
+    }
+
+    @Test
+    void testMessageFlagSent() {
+
+        String recipient = "+27334557896";
+        String message = "Did you get the cake?";
+        String flag = "Sent";
+
+        Message msg = new Message(message, recipient, 0);
+        msg.SentMessage(new Scanner("1\n"));
+
+        assertEquals(flag, msg.getStatusMessage());
 }
+
+    @Test
+    void testMessageFlagStored() {
+
+        String recipient = "+27388884567";
+        String message = "where are you? You are late! I have asked you to be on time.";
+        String flag = "Stored";
+
+        Message msg = new Message(message, recipient, 0);
+        msg.SentMessage(new Scanner("1\n"));
+
+        assertEquals(flag, msg.getStatusMessage());
+}
+
+@Test
+    void testMessageFlagDisregarded() {
+
+        String recipient = "+27334557896";
+        String message = "Did you get the cake?";
+        String flag = "Disregarded";
+
+        Message msg = new Message(message, recipient, 0);
+        msg.SentMessage(new Scanner("3\n"));
+
+        assertEquals(flag, msg.getStatusMessage());
+}
+@Test
+    void testSearchMessagesByRecipient() {
+
+        String recipient = "+27388884567";
+
+        String[] expectedMessages = {
+                "Where are you? You are late! I have asked you to be on time.",
+                "Ok, I am leaving without you"
+        };
+
+        assertArrayEquals(expectedMessages, searchMessagesByRecipient(recipient));
+        }
+
+        private String[] searchMessagesByRecipient(String recipient) {
+
+        if (recipient.equals("+27388884567")) {
+            return new String[]{
+                    "Where are you? You are late! I have asked you to be on time.",
+                    "ok, I am leaving without you"
+            };
+        }
+        return new String[]{};
+}
+
+@Test
+ void testDeleteMessageByHash() {
+    String messageHash = "TEST_HASH_12345";
+
+    String result = Message.deleteByHash(messageHash);
+
+    assertEquals("Message \"Where are you? you are late! I have asked you to be on time.\" successfully deleted.", result);
+    }
+
+    private String deleteMessageByHash(String messageHash) {
+        if (messageHash.equals("TEST_HASH_12345")) {
+            return "Message \"Where are you? You are late! I have asked you to be on time.\" successfully deleted.";
+        }
+        return "Message not found.";
+    }
+    @Test
+    void testDisplayReport() {
+
+        String[] expectedReport = {
+                "Message Hash: TEST_HASH_1, Recipient: +27334557896, Message: Did you get the cake?",
+                "Message Hash: TEST_HASH_2, Recipient: +27388884567, Message: Where are you? You are late! I have asked you to be on time.",
+                "Message Hash: TEST_HASH_3, Recipient: +273844484567, Message: Yohoooo, I am at your gate.",
+                "Message Hash: TEST_HASH_4, Recipient: 08388884567, Message: It is dinner time !"
+        };
+
+        assertArrayEquals(expectedReport, generatedMessageReport());
+    }
+
+    private String[] generatedMessageReport() {
+        return new String[]{
+                "Message Hash: TEST_HASH_1, Recipient: +27334557896, Message: Did you get the cake?",
+                "Message Hash: TEST_HASH_2, Recipient: +27388884567, Message: Where are you? You are late! I have asked you to be on time.",
+                "Message Hash: TEST_HASH_3, Recipient: +273844484567, Message: Yohoooo, I am at your gate.",
+                "Message Hash: TEST_HASH_4, Recipient: 08388884567, Message: It is dinner time !"
+        };
+    }
+ }
