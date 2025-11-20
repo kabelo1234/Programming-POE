@@ -87,10 +87,9 @@ public class Main {
                 }  else if (!msg.checkMessageID()) {
                     out.println("Message ID already used or invalid. Please use a unique ID.");
                 } else if (msg.checkRecipientCell() == 0) {
-                    out.println("Invalid recipient cell number. Please include the country code.");
-                } else { //Generates message hash and sends message
-                String hash = msg.createMessageHash(messagesSent);
-                out.println("Message Hash: " + hash);
+                    JOptionPane.showMessageDialog(null, "Invalid cell number format. Include '+27' and 9 digits.");
+                    continue;
+                }
 
                 String hash = msg.createMessageHash();
                 String result = msg.SentMessage(scanner);
