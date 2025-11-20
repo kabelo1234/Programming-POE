@@ -2,7 +2,6 @@ package com.example;
 import org.junit.jupiter.api.Test;
 import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.Scanner;
 
 /**
  * Test class for the Message class.
@@ -16,7 +15,7 @@ public class MessageTest {
     @Test
     void testMessageLengthSuccess() {
         String text = "Hi Mike, can you join us for dinner tonight?";
-        Message msg = new Message(text, "+27718693002");
+        Message msg = new Message(text, "+27718693002", 0);
 
         // Check that the message length is within the limit
         assertTrue(text.length() <= 250);

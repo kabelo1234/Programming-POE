@@ -3,9 +3,6 @@ package com.example;
 import java.io.*;
 import java.util.Scanner;
 
-/**
- * Message class to handle message creation, validation, and storage.
- */
 public class Message {
     private static int idCounter = 0;
 
@@ -33,9 +30,7 @@ public class Message {
         this.messageID = generateMessageID(loopIndex);
         this.messageText = messageText;
         this.recipientCell = recipientCell;
-
-        //Prints the generated message ID
-    System.out.println("Message ID generated : " + messageID);
+        System.out.println("Message ID generated: " + messageID);
     }
 
     // generates a 10 digit message ID using loop counter and loop index

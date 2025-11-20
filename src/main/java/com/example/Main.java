@@ -5,10 +5,6 @@ import java.util.Scanner;
 
 import static java.lang.System.*;
 
-/**
- * Main class to run the QuickChat application.
- * Handles user registration, login, and message sending functionalities.
- */
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(in);
@@ -21,8 +17,6 @@ public class Main {
         String phoneNumber = JOptionPane.showInputDialog("Enter your phone number:");
 
         login user = new login(name, surname, username, password, phoneNumber);
-        
-        // Registering the user
         String registrationMessage = user.registerUser(name, password, phoneNumber, username, surname);
         JOptionPane.showMessageDialog(null, registrationMessage);
 
@@ -99,7 +93,6 @@ public class Main {
 
                 String hash = msg.createMessageHash();
                 String result = msg.SentMessage(scanner);
-                out.println(result);
 
                 String details = "Message ID: " + msg.getMessageID() + "\n" +
                         "Message Hash: " + hash + "\n" +
@@ -159,4 +152,3 @@ public class Main {
         scanner.close();
     }
 }
-                
