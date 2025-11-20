@@ -47,10 +47,7 @@ public class Message {
 
     // validates cell phone number
     public int checkRecipientCell() {
-        if (recipientCell != null && recipientCell.matches("\\+27\\d{9}")) {
-            return 1; // Valid
-        }
-        return 0; // Invalid
+        return (recipientCell != null && recipientCell.matches("\\+27\\d{9}")) ? 1 : 0;
     }
 
     // Creates a message hash based on the message ID, number, and text
