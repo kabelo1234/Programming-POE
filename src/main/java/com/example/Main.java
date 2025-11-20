@@ -78,8 +78,7 @@ public class Main {
                 out.print("Enter message: ");
                 String messageText = scanner.nextLine();
 
-                // Creates Message object
-                Message msg = new Message(messageText, recipientCell);
+                if (recipientCell == null || messageText == null) continue;
 
                 Message msg = new Message(messageText, recipientCell, messagesSent);
 
