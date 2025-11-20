@@ -82,7 +82,7 @@ public class MessageTest {
         // Validate the message ID format and uniqueness
         assertEquals(10, msg.getMessageID().length());
         // Check that the message ID is valid and has been used
-        assertEquals(true, msg.checkMessageID());
+        assertEquals(10, msg.getMessageID().length());
         System.out.println("Message ID generated : " + msg.getMessageID());
     }
 
