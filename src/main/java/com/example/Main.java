@@ -65,8 +65,7 @@ public class Main {
                     JOptionPane.QUESTION_MESSAGE
             );
 
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            if (menu == null) break;
 
             int choice;
             try {
