@@ -61,7 +61,7 @@ public class Message {
         return hash.toUpperCase();
     }
 
-    // Handles sending, storing, or disregarding the message based on user input
+    // Send, store, or disregard
     public String SentMessage(Scanner scanner) {
         System.out.println("Choose an option:");
         System.out.println("1. Send");
