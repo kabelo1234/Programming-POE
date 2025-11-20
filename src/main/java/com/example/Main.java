@@ -104,7 +104,7 @@ public class Main {
                         "Message: " + messageText + "\n\n" +
                         "Status: " + result;
 
-                JOptionPane.showMessageDialog(null, messageDetails, "Message Sent", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, details, "Message Details", JOptionPane.INFORMATION_MESSAGE);
 
                 messagesSent++;
 
