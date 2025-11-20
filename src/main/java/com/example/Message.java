@@ -38,25 +38,11 @@ public class Message {
     System.out.println("Message ID generated : " + messageID);
     }
 
-    // Generates a unique 10-digit message ID
-    private static String generateMessageID() {
-        String id;
-        do {
-            long number = (long) (Math.random() * 1_000_000_0000L);
-            id = String.format("%010d", number);
-        } while (usedMessageIDs.contains(id));
-        usedMessageIDs.add(id);
-        return id;
-    }
-
-    // Checks if the message ID is valid and has been used
-    public boolean checkMessageID() {
-        return messageID != null && messageID.length() == 10 && usedMessageIDs.contains(messageID);
-    }
-
-    // Getter for message ID
-    public String getMessageID() {
-        return messageID;
+    // generates a 10 digit message ID using loop counter and loop index
+    private static String generateMessageID(int loopIndex) {
+        idCounter++;
+        String base = String.valueOf(loopIndex) + String.valueOf(idCounter);
+        return String.format("%010d", Long.parseLong(base));
     }
 
     // Validates the recipient's cell number format
