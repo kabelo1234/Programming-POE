@@ -113,11 +113,20 @@ public class Main {
             } else if (choice == 2) { // Displays sent messages
                 out.println("Coming soon");
 
-            } else if (choice == 3) { // Exits the program and shows total messages sent
-                out.println("Exiting QuickChat. Goodbye!");
-                JOptionPane.showMessageDialog(null, "Total messages sent: " + Message.getTotalMessagesSent(), "Summary", JOptionPane.INFORMATION_MESSAGE);
-                scanner.close();
-                return;
+            } else if (choice == 7) {
+                String hashToDelete = JOptionPane.showInputDialog("Enter message hash to delete:");
+                JOptionPane.showMessageDialog(null, Message.deleteByHash(hashToDelete),
+                        "Delete Result", JOptionPane.INFORMATION_MESSAGE);
+
+            } else if (choice == 8) {
+                JOptionPane.showMessageDialog(null,
+                        Message.displayMessageReport(name),
+                        "Message Report",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+            } else if (choice == 9) {
+                JOptionPane.showMessageDialog(null, "Exiting QuickChat. Total messages sent: " + Message.getTotalMessagesSent());
+                break;
 
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid option.");
