@@ -31,7 +31,7 @@ public class MessageTest {
         Message msg = new Message(longMessage, "+27718693002", 0);
 
         // Check that the message length exceeds the limit
-        assertEquals(true, longMessage.length() > 250);
+        assertTrue(longMessage.length() > 250);
         // Validate the message length
         assertEquals("Message exceeds 250 characters by 1 character, please reduce size.",
                 validateMessageLength(longMessage));
