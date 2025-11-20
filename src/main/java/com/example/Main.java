@@ -96,9 +96,7 @@ public class Main {
                 String result = msg.SentMessage(scanner);
                 out.println(result);
 
-                // Displays message details in a dialog box
-                String messageDetails =
-                        "Message ID: " + msg.getMessageID() + "\n" +
+                String details = "Message ID: " + msg.getMessageID() + "\n" +
                         "Message Hash: " + hash + "\n" +
                         "Recipient: " + recipientCell + "\n" +
                         "Message: " + messageText + "\n" +
