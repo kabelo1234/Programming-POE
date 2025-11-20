@@ -37,11 +37,15 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Incorrect login details. Exiting program.");
             return;
         }
-        
-        // Message sending functionality
-        out.println("\nWelcome to QuickChat.");
-        out.print("How many messages would you like to send? ");
-        int messageLimit = scanner.nextInt();
+
+        // Message limit
+        int messageLimit;
+        try {
+            messageLimit = Integer.parseInt(JOptionPane.showInputDialog("How many messages would you like to send?"));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Invalid number. Defaulting to 1 message.");
+            messageLimit = 1;
+        }
 
         int messagesSent = 0;
         while (true) {
