@@ -100,17 +100,39 @@ public class Message {
         return statusMessage;
     }
 
-            // Prints all sent messages
-     public String printMessages() {
-                if (sentMessage.isEmpty()) {
-                    return "No messages to display.";
-                }
-                StringBuilder sb = new StringBuilder("Messages:\n");
-                for (String msg : sentMessage) {
-                    sb.append(msg).append("\n");
-                }
-                return sb.toString();
+    public static void writeJsonFile(String text) {
+        try (FileWriter file = new FileWriter("messages.txt", true)) {
+            file.write(text + "\n");
+        } catch (IOException e) {
+            System.out.println("Error storing message: " + e.getMessage());
+        }
+    }
+
+    public static void readStoredMessages() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("messages.txt"))) {
+            String line;
+            int idx = 0;
+            while ((line = reader.readLine()) != null && idx < storedMessages.length) {
+                storedMessages[idx++] = line;
             }
+        } catch (IOException e) {
+            System.out.println("Error reading stored messages: " + e.getMessage());
+        }
+    }
+
+    // a. Display sender and recipient of all sent messages
+    public static String printMessages(String senderName) {
+        if (totalMessagesSent == 0) {
+            return "No messages sent yet.";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < totalMessagesSent; i++) {
+            sb.append("Sender: ").append(senderName)
+                    .append(", Recipient: ").append(recipients[i])
+                    .append("\n");
+        }
+        return sb.toString();
+    }
 
             // Getter for total messages sent
             public static int getTotalMessagesSent() {
