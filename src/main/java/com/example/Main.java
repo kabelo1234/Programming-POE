@@ -110,8 +110,10 @@ public class Main {
                 }
                 }
 
-            } else if (choice == 2) { // Displays sent messages
-                out.println("Coming soon");
+            } else if (choice == 6) {
+                String recipientSearch = JOptionPane.showInputDialog("Enter recipient cell to search:");
+                JOptionPane.showMessageDialog(null, Message.searchByRecipient(recipientSearch),
+                        "Search Result", JOptionPane.INFORMATION_MESSAGE);
 
             } else if (choice == 7) {
                 String hashToDelete = JOptionPane.showInputDialog("Enter message hash to delete:");
