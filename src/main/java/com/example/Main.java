@@ -68,7 +68,15 @@ public class Main {
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
-            if (choice == 1) { // Checks if user has reached their message limit
+            int choice;
+            try {
+                choice = Integer.parseInt(menu);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number from 1-9.");
+                continue;
+            }
+
+            if (choice == 1) {
                 if (messagesSent >= messageLimit) {
                     JOptionPane.showMessageDialog(null, "Message limit reached.");
                     continue;
