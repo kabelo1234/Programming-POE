@@ -48,6 +48,7 @@ public class Main {
         }
 
         int messagesSent = 0;
+
         while (true) {
             String menu = JOptionPane.showInputDialog(
                     null,
