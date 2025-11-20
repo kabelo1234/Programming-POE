@@ -28,7 +28,7 @@ public class MessageTest {
     @Test
     void testMessageLengthFailure() {
         String longMessage = "a".repeat(251);
-        Message msg = new Message(longMessage, "+27718693002");
+        Message msg = new Message(longMessage, "+27718693002", 0);
 
         // Check that the message length exceeds the limit
         assertEquals(true, longMessage.length() > 250);
