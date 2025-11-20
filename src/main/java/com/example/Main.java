@@ -120,7 +120,7 @@ public class Main {
                 return;
 
             } else {
-                out.println("Invalid option. Please try again.");
+                JOptionPane.showMessageDialog(null, "Invalid option.");
             }
         }
 
