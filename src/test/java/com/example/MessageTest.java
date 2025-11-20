@@ -89,8 +89,8 @@ public class MessageTest {
     // Test to ensure the message hash is created in the correct format.
     @Test
     void testMessageHashCorrectFormat() {
-        Message msg = new Message("Hi tonight", "+2718693002");
-        String hash = msg.createMessageHash(0);
+        Message msg = new Message("Hi tonight", "+2718693002", 0);
+        String hash = msg.createMessageHash();
 
         // Validate the message hash format using regex
         assertEquals(true, hash.matches("[0-9]{2}:0:[A-Z]{4,}"));
