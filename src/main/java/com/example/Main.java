@@ -107,8 +107,26 @@ public class Main {
                 JOptionPane.showMessageDialog(null, messageDetails, "Message Sent", JOptionPane.INFORMATION_MESSAGE);
 
                 messagesSent++;
-                }
-                }
+
+            } else if (choice == 2) {
+                JOptionPane.showMessageDialog(null, "Coming soon");
+
+            } else if (choice == 3) {
+                JOptionPane.showMessageDialog(null,
+                        Message.printMessages(name),
+                        "Senders & Recipients",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+            } else if (choice == 4) {
+                JOptionPane.showMessageDialog(null,
+                        "Longest sent message: \n" + Message.getLongestSentMessage(),
+                        "Longest Message",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+            } else if (choice == 5) {
+                String searchID = JOptionPane.showInputDialog("Enter message ID to search:");
+                JOptionPane.showMessageDialog(null, Message.searchByMessageID(searchID),
+                        "Search Result", JOptionPane.INFORMATION_MESSAGE);
 
             } else if (choice == 6) {
                 String recipientSearch = JOptionPane.showInputDialog("Enter recipient cell to search:");
