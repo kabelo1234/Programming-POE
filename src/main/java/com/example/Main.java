@@ -92,7 +92,7 @@ public class Main {
                 String hash = msg.createMessageHash(messagesSent);
                 out.println("Message Hash: " + hash);
 
-
+                String hash = msg.createMessageHash();
                 String result = msg.SentMessage(scanner);
                 out.println(result);
 
