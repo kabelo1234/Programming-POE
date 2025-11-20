@@ -70,8 +70,13 @@ public class Message {
                 javax.swing.JOptionPane.QUESTION_MESSAGE
         );
 
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int choice;
+        try {
+            choice = Integer.parseInt(choiceStr);
+        } catch (Exception e) {
+            statusMessage = "Invalid option!";
+            return statusMessage;
+        }
 
           // Process user choice
             if (choice == 1) {
