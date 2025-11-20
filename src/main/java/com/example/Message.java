@@ -7,13 +7,15 @@ import java.util.Scanner;
  * Message class to handle message creation, validation, and storage.
  */
 public class Message {
-    private static final HashSet<String> usedMessageIDs = new HashSet<>(); // To track used message IDs
-    private static final List<String> sentMessage = new ArrayList<>(); // To store sent messages
-    private static int totalMessagesSent = 0; // To track total messages sent
-    private final String messageID; // Unique 10-digit message ID
-    private final String messageText; // Message content
-    private final String recipientCell; // Recipient's cell number
-    private String statusMessage; // Status of the message (sent, stored, deleted)
+    private static int idCounter = 0;
+
+    // Parallel arrays
+    public static String[] sentMessages = new String[100];
+    public static String[] disregardedMessages = new String[100];
+    public static String[] storedMessages = new String[100];
+    public static String[] messageHashes = new String[100];
+    public static String[] messageIDs = new String[100];
+    public static String[] recipients = new String[100];
 
     // Constructor
     public Message(String messageText, String recipientCell) {
