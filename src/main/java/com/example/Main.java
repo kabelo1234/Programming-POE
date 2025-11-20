@@ -12,21 +12,14 @@ import static java.lang.System.*;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(in);
-   
-        // Get user details for registration
-        out.print("Enter your name: ");
-        String name = scanner.nextLine();
-        out.print("Enter your surname: ");
-        String surname = scanner.nextLine();
-        
-        out.print("Enter your username: ");
-        String username = scanner.nextLine();
-        out.print("Enter your password: ");
-        String password = scanner.nextLine();
-        out.print("Enter your phone number: ");
-        String phoneNumber = scanner.nextLine();
 
-        // Create a login object
+        // Registration
+        String name = JOptionPane.showInputDialog("Enter your name:");
+        String surname = JOptionPane.showInputDialog("Enter your surname:");
+        String username = JOptionPane.showInputDialog("Enter your username:");
+        String password = JOptionPane.showInputDialog("Enter your password:");
+        String phoneNumber = JOptionPane.showInputDialog("Enter your phone number:");
+
         login user = new login(name, surname, username, password, phoneNumber);
         
         // Registering the user
