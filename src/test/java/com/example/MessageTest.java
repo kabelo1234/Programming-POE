@@ -78,7 +78,7 @@ public class MessageTest {
     void testMessageIDGenerated() {
         Message msg = new Message("Hello", "+2718693002", 0);
         // Check that the message ID is not null and has a length of 10
-        assertEquals(false, msg.getMessageID() == null);
+        assertNotNull(msg.getMessageID());
         // Validate the message ID format and uniqueness
         assertEquals(10, msg.getMessageID().length());
         // Check that the message ID is valid and has been used
