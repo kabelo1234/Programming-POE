@@ -101,7 +101,7 @@ public class Main {
                         "Message ID: " + msg.getMessageID() + "\n" +
                         "Message Hash: " + hash + "\n" +
                         "Recipient: " + recipientCell + "\n" +
-                        "Message: " + messageText + "\n\n" +
+                        "Message: " + messageText + "\n" +
                         "Status: " + result;
 
                 JOptionPane.showMessageDialog(null, details, "Message Details", JOptionPane.INFORMATION_MESSAGE);
