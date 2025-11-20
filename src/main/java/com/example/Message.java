@@ -50,21 +50,15 @@ public class Message {
         return (recipientCell != null && recipientCell.matches("\\+27\\d{9}")) ? 1 : 0;
     }
 
-    // Creates a message hash based on the message ID, number, and text
-    public String createMessageHash(int messageNumber) {
-        String idPart = messageID.length() >= 2 ? messageID.substring(0, 2) : messageID;
-        String numberPart = String.valueOf(messageNumber);
-        String textPart;
-        if (messageText.length() >= 3) {
-            textPart = messageText.substring(0, 2) + messageText.substring(messageText.length() - 2);
-        } else {
-            textPart = messageText;
-        }
-        String hash = (idPart + ":" + numberPart + ":" + textPart).toUpperCase();
-
-
-    System.out.println("Message hash is correct");
-    return hash;
+    
+    public String createMessageHash() {
+        String text = messageText.trim();
+        int firstSpace = text.indexOf(" ");
+        int lastSpace = text.lastIndexOf(" ");
+        String firstWord = (firstSpace == -1) ? text : text.substring(0, firstSpace);
+        String lastWord = (lastSpace == -1) ? text : text.substring(lastSpace + 1);
+        String hash = messageID.substring(0, 2) + ":" + firstWord + lastWord;
+        return hash.toUpperCase();
     }
 
     // Handles sending, storing, or disregarding the message based on user input
