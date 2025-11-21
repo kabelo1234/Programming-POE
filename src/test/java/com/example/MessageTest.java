@@ -144,7 +144,10 @@ public class MessageTest {
             "It is dinner time !",
         };
 
-        assertArrayEquals(testMessages, Message.printMessages("You").split("\n"));
+        String result = Message.printMessages("You");
+        System.out.println("Result: " + result);
+
+        assertArrayEquals(testMessages, result.split("\n"));
     }
    
     @Test 
@@ -190,7 +193,7 @@ public class MessageTest {
 
         String recipient = "+27334557896";
         String message = "Did you get the cake?";
-        String flag = "Sent";
+        String flag = "Message successfully Sent";
 
         Message msg = new Message(message, recipient, 0);
         msg.SentMessage(new Scanner("1\n"));
@@ -241,7 +244,7 @@ public class MessageTest {
         if (recipient.equals("+27388884567")) {
             return new String[]{
                     "Where are you? You are late! I have asked you to be on time.",
-                    "ok, I am leaving without you"
+                    "Ok, I am leaving without you"
             };
         }
         return new String[]{};
@@ -256,12 +259,6 @@ public class MessageTest {
     assertEquals("Message \"Where are you? you are late! I have asked you to be on time.\" successfully deleted.", result);
     }
 
-    private String deleteMessageByHash(String messageHash) {
-        if (messageHash.equals("TEST_HASH_12345")) {
-            return "Message \"Where are you? You are late! I have asked you to be on time.\" successfully deleted.";
-        }
-        return "Message not found.";
-    }
     @Test
     void testDisplayReport() {
 

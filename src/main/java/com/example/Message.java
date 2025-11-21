@@ -56,7 +56,7 @@ public class Message {
         return hash.toUpperCase();
     }
 
-    // Send, store, or disregard
+    // Send, store, or disregard messages
     public String SentMessage(Scanner scanner) {
         String choiceStr = javax.swing.JOptionPane.showInputDialog(
                 null,
@@ -73,19 +73,19 @@ public class Message {
             return statusMessage;
         }
 
-        if (choice == 1) { // SEND
+        if (choice == 1) { // Sends message
             sentMessages[totalMessagesSent] = messageText;
             messageIDs[totalMessagesSent] = messageID;
             recipients[totalMessagesSent] = recipientCell;
             messageHashes[totalMessagesSent] = createMessageHash();
             totalMessagesSent++;
             statusMessage = "Message successfully sent";
-        } else if (choice == 2) { // STORE
+        } else if (choice == 2) { // Stores message
             storedMessages[totalStored] = messageText;
             totalStored++;
             statusMessage = "Message successfully stored";
             writeJsonFile(messageText);
-        } else if (choice == 3) { // DISREGARD
+        } else if (choice == 3) { // Deletes the message
             disregardedMessages[totalDisregarded] = messageText;
             totalDisregarded++;
             statusMessage = "Message deleted!";
@@ -115,21 +115,21 @@ public class Message {
         }
     }
 
-    // a. Display sender and recipient of all sent messages
+    // Display sender and recipient of all sent messages
     public static String printMessages(String senderName) {
         if (totalMessagesSent == 0) {
             return "No messages sent yet.";
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < totalMessagesSent; i++) {
-            sb.append("Sender: ").append(senderName)
+            sb.append("Sender: ").append(senderName != null ? senderName : "unknown")
                     .append(", Recipient: ").append(recipients[i])
                     .append("\n");
         }
         return sb.toString();
     }
 
-    // b. Longest sent message
+    // Longest sent message
     public static String getLongestSentMessage() {
         String longest = "";
         for (int i = 0; i < totalMessagesSent; i++) {
@@ -140,7 +140,7 @@ public class Message {
         return longest;
     }
 
-    // c. Search for message ID
+    // Search for message ID
     public static String searchByMessageID(String id) {
         for (int i = 0; i < totalMessagesSent; i++) {
             if (messageIDs[i].equals(id)) {
@@ -150,7 +150,7 @@ public class Message {
         return "Message ID not found.";
     }
 
-    // d. Search by recipient
+    // Search by recipient
     public static String searchByRecipient(String recipient) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < totalMessagesSent; i++) {
@@ -161,7 +161,7 @@ public class Message {
         return sb.length() == 0 ? "No messages found for this recipient." : sb.toString();
     }
 
-    // e. Delete message by hash
+    //Delete message by hash
     public static String deleteByHash(String hash) {
         for (int i = 0; i < totalMessagesSent; i++) {
             if (messageHashes[i].equals(hash)) {
@@ -179,7 +179,7 @@ public class Message {
         return "Hash not found.";
     }
 
-    // f. Full message report
+    // Full message report
     public static String displayMessageReport(String senderName) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < totalMessagesSent; i++) {
