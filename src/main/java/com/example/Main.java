@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(in);
 
-        // Registration
+        // Registration section
         String name = JOptionPane.showInputDialog("Enter your name:");
         String surname = JOptionPane.showInputDialog("Enter your surname:");
         String username = JOptionPane.showInputDialog("Enter your username:");
