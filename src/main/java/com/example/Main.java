@@ -22,7 +22,7 @@ public class Main {
 
         if (!registrationMessage.equals("Registration successful!")) return;
 
-        // Login (GUI)
+        // Login section
         String loginUsername = JOptionPane.showInputDialog("Enter your username to login:");
         String loginPassword = JOptionPane.showInputDialog("Enter your password to login:");
         boolean loginStatus = user.loginUser(loginUsername, loginPassword, phoneNumber);
